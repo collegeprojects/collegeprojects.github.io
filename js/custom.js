@@ -3,11 +3,22 @@ $(document).ready(
 		tabsHandlers();
 		profileEventHandlers();
 		$(window.location.hash+"_id").trigger("click");
+        /*
+         *$(document).ajaxSuccess(function() {  
+         *    Cufon.refresh();
+         *});
+         */
 	}
 );
 
+function refreshCufon() {
+    //Refresh Cufon fonts
+    Cufon.refresh();
+}
+
 function profileEventHandlers(){
     inputFieldHandlers();
+    refreshCufon();
 }
 function saveBtnHandler(){
 	$("#save_btn").click(function(){
@@ -103,55 +114,66 @@ function unfocusEventHandler() {
 //Profile tab
 function profileTabClickEventHandler(){
     $("#profile_id").click(function (){
-        $("#content").load("profile.html #content", profileEventHandlers);
+        $("#content").load("profile.html #content > *", profileEventHandlers);
         $("#donate_id").removeClass("active");
         $("#need_id").removeClass("active");
         $("#transfuse_id").removeClass("active");
         $("#log_id").removeClass("active");
-        $(this).addClass("active");
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active");    
+        }
     });
 }
 //Donate tab
 function donateTabClickEventHandler(){
     $("#donate_id").click(function (){
-        $("#content").load("donate.html #content");
+        $("#content").load("donate.html #content > *", refreshCufon);
         $("#profile_id").removeClass("active");
         $("#need_id").removeClass("active");
         $("#transfuse_id").removeClass("active");
         $("#log_id").removeClass("active");
         $(this).addClass("active");
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active");    
+        }
     });
 }
 //Need tab
 function needTabClickEventHandler(){
     $("#need_id").click(function (){
-        $("#content").load("need.html #content");
+        $("#content").load("need.html #content > *", refreshCufon);
         $("#profile_id").removeClass("active");
         $("#donate_id").removeClass("active");
         $("#transfuse_id").removeClass("active");
         $("#log_id").removeClass("active");
-        $(this).addClass("active");
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active");
+        }
     });
 }
 //Transfuse tab
 function transfuseTabClickEventHandler(){
     $("#transfuse_id").click(function (){
-        $("#content").load("transfuse.html #content");
+        $("#content").load("transfuse.html #content > *", refreshCufon);
         $("#profile_id").removeClass("active");
         $("#donate_id").removeClass("active");
         $("#need_id").removeClass("active");
         $("#log_id").removeClass("active");
-        $(this).addClass("active");
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active");    
+        }
     });
 }
 //Log tab
 function logTabClickEventHandler(){
     $("#log_id").click(function (){
-        $("#content").load("log.html #content");
+        $("#content").load("log.html #content > *", refreshCufon);
         $("#profile_id").removeClass("active");
         $("#donate_id").removeClass("active");
         $("#need_id").removeClass("active");
         $("#transfuse_id").removeClass("active");
-        $(this).addClass("active");
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active");
+        }
     });
 }
